@@ -7,6 +7,7 @@ body {
   margin: 0; }
 
 .btn {
+  display: inline-block;
   text-align: center;
   border: none;
   background-color: antiquewhite;
@@ -59,6 +60,16 @@ body {
   .quiz:hover .quiz__answer-btn:not(:hover) {
     transform: scale(0.96);
     box-shadow: 0 0.3rem 5rem rgba(38, 38, 38, 0.2); }
+
+.panel {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 10rem;
+  background-color: #eb8d8d; }
+  .panel__new-game {
+    background-color: #75cfcf;
+    font-size: 2.5em; }
 
 :root {
   font-family: Inter, Avenir, Helvetica, Arial, sans-serif; }

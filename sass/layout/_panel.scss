@@ -1,0 +1,12 @@
+.panel {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 10rem;
+  background-color: $color-red;
+
+  &__new-game {
+    background-color: rgb(117, 207, 207);
+    font-size: 2.5em;
+  }
+}

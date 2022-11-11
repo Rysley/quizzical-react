@@ -8,7 +8,13 @@ export default function Quizzes(props) {
     <section className="quizzes">
       <form className="quizzes__form">
         {questionsArr.map((question, i) => {
-          return <QuizCard question={question} key={i} />;
+          return (
+            <QuizCard
+              question={question}
+              key={i}
+              handleClick={props.handleClick}
+            />
+          );
         })}
       </form>
     </section>

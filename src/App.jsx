@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Header from "./components/Header";
 import Quizzes from "./components/Quizzes";
+import Panel from "./components/Panel";
 
 function App() {
+  const [gameNum, setGameNum] = React.useState(0);
   const [questions, setQuestions] = React.useState([]);
   console.log(questions);
 
@@ -12,16 +14,21 @@ function App() {
     )
       .then((res) => res.json())
       .then((data) => setQuestions(data.results));
-  }, []);
+  }, [gameNum]);
 
   function newGame() {
-    setQuestions((prevstate) => {});
+    setGameNum((num) => num + 1);
+  }
+
+  function chooseAnswer() {
+    console.log("clicked");
   }
 
   return (
     <div className="App">
       <Header />
-      <Quizzes questions={questions} />
+      <Quizzes questions={questions} handleClick={() => chooseAnswer()} />
+      <Panel handleNewGame={() => newGame()} />
     </div>
   );
 }
