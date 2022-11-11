@@ -1,12 +1,12 @@
 import React from "react";
 import Header from "./components/Header";
-import Features from "./components/Features";
+import Quizzes from "./components/Quizzes";
 
 function App() {
   return (
     <div className="App">
       <Header />
-      <Features />
+      <Quizzes />
     </div>
   );
 }

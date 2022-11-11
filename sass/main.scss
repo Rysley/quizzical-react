@@ -1,5 +1,7 @@
 $color-red: rgb(235, 141, 141);
 $color-blue: rgb(2, 27, 27);
+$color-black: #262626;
+$color-gray: #e0e0e0;
 
 :root {
   font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
@@ -13,10 +15,32 @@ $color-blue: rgb(2, 27, 27);
 
 body {
   margin: 0;
+  background-color: $color-black;
 }
 
 html {
   font-size: 10px;
+}
+
+.btn {
+  text-align: center;
+  border: none;
+  background-color: antiquewhite;
+  padding: 1rem;
+  border-radius: 1.5rem;
+  cursor: pointer;
+  box-shadow: 0 0.2rem 1rem rgba($color-black, 0.2);
+  transform: translateY(0);
+  transition: all 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 1rem 2rem rgba($color-black, 0.2);
+  }
+
+  &:active {
+    transform: translateY(1px);
+  }
 }
 
 .header {
@@ -28,22 +52,44 @@ html {
   color: $color-blue;
 }
 
-.features {
-  background-color: aliceblue;
+.quizzes {
+  background-color: $color-gray;
   display: flex;
   justify-content: center;
 
-  &__list {
+  &__form {
+    width: 80vh;
     list-style: none;
     display: inline-block;
     font-size: 1.6rem;
   }
+}
 
-  &__list-item {
-    line-height: 4rem;
+.quiz {
+  display: block;
 
-    &:nth-child(odd) {
-      background-color: rgb(227, 236, 243);
+  &__question {
+    text-align: start;
+  }
+
+  &__buttons {
+    max-width: 114rem;
+    display: flex;
+    padding-bottom: 2rem;
+    justify-content: center;
+  }
+
+  &__answer-btn {
+    font-size: 1.8rem;
+    margin-right: 1rem;
+    min-width: 15rem;
+
+    &:last-child {
+      margin-right: 0;
     }
+  }
+
+  &:hover &__answer-btn:not(:hover) {
+    transform: scale(0.96);
   }
 }
