@@ -1,0 +1,49 @@
+$color-red: rgb(235, 141, 141);
+$color-blue: rgb(2, 27, 27);
+
+:root {
+  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
+}
+
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+html {
+  font-size: 10px;
+}
+
+.header {
+  text-align: center;
+  font-size: 3rem;
+  padding: 1rem;
+  margin-top: 5rem;
+  background-color: $color-red;
+  color: $color-blue;
+}
+
+.features {
+  background-color: aliceblue;
+  display: flex;
+  justify-content: center;
+
+  &__list {
+    list-style: none;
+    display: inline-block;
+    font-size: 1.6rem;
+  }
+
+  &__list-item {
+    line-height: 4rem;
+
+    &:nth-child(odd) {
+      background-color: rgb(227, 236, 243);
+    }
+  }
+}
