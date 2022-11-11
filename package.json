@@ -10,6 +10,7 @@
     "compile:sass": "node-sass sass/main.scss src/index.css -w"
   },
   "dependencies": {
+    "nanoid": "^4.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "sass": "^1.56.1"
