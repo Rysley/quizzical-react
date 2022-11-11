@@ -1,0 +1,12 @@
+.quizzes {
+  background-color: $color-gray;
+  display: flex;
+  justify-content: center;
+
+  &__form {
+    width: 80vh;
+    list-style: none;
+    display: inline-block;
+    font-size: 1.6rem;
+  }
+}
