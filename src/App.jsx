@@ -38,15 +38,24 @@ function App() {
         },
       };
       console.log(newForm);
+      console.log(Object.values(quizForm).length);
       return newForm;
     });
+  }
+
+  function checkForm() {
+    const formArray = Object.values(quizForm);
   }
 
   return (
     <div className="App">
       <Header />
       <Quizzes questions={questions} handleClick={(e) => chooseAnswer(e)} />
-      <Panel handleNewGame={() => newGame()} />
+      <Panel
+        formIsComplete={Object.values(quizForm).length === questions.length}
+        handleNewGame={() => newGame()}
+        handleSubmit={() => checkForm()}
+      />
     </div>
   );
 }
