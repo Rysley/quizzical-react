@@ -9,7 +9,7 @@ export default function Panel(props) {
         </div>
       )}
       <div className="panel__new-game btn" onClick={props.handleNewGame}>
-        New Game
+        {props.formIsComplete ? "New Game" : "Restart"}
       </div>
     </section>
   );

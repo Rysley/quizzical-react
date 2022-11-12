@@ -4,7 +4,7 @@ import Quizzes from "./components/Quizzes";
 import Panel from "./components/Panel";
 
 function App() {
-  const [gameNum, setGameNum] = useState(0);
+  const [gameCount, setGameCount] = useState(0);
   const [questions, setQuestions] = useState([]);
   const [quizForm, setQuizForm] = useState({});
 
@@ -16,10 +16,10 @@ function App() {
       .then((data) => {
         setQuestions(data.results);
       });
-  }, [gameNum]);
+  }, [gameCount]);
 
   function newGame() {
-    setGameNum((num) => num + 1);
+    setGameCount((num) => num + 1);
   }
 
   function chooseAnswer(e) {
@@ -29,7 +29,7 @@ function App() {
         ...prevForm,
         [selected.id]: {
           cardID: selected.id,
-          answer: e.target.innerHTML,
+          answer: selected.innerHTML,
           isCorrect:
             questions[selected.id].correct_answer ===
             selected.getAttribute("value")
