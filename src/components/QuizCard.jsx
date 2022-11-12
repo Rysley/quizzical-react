@@ -3,16 +3,19 @@ import { nanoid } from "nanoid";
 
 export default function QuizCard(props) {
   const data = props.question;
-  const incorrectAnswers = data.incorrect_answers;
-  const correctAnswer = [data.correct_answer];
-  const allAnswers = incorrectAnswers.concat(correctAnswer);
-  const Cards = allAnswers.map((answer, i) => {
+  const allAnswers = data.all_answers;
+
+  const answerBtns = allAnswers.map((answer) => {
     return (
       <div
         className="quiz__answer-btn btn"
+        /* className={`quiz__answer-btn btn ${
+          answer === props.question[id].all_answers ? "quiz__answer-btn--clicked" : ""
+        }`} */
+        form={props.form}
         onClick={props.handleClick}
         value={answer}
-        key={i}
+        key={nanoid()}
         id={props.id}
       >
         {answer}
@@ -23,7 +26,7 @@ export default function QuizCard(props) {
   return (
     <div className="quiz">
       <h4 className="quiz__question">{data.question}</h4>
-      <div className="quiz__buttons">{Cards}</div>
+      <div className="quiz__buttons">{answerBtns}</div>
     </div>
   );
 }

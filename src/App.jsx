@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import Header from "./components/Header";
-import Quizzes from "./components/Quizzes";
+import QuizCard from "./components/QuizCard";
 import Panel from "./components/Panel";
+import { nanoid } from "nanoid";
 
 function App() {
   const [gameCount, setGameCount] = useState(0);
   const [questions, setQuestions] = useState([]);
-  const [quizForm, setQuizForm] = useState({});
 
   useEffect(() => {
     fetch(
@@ -14,7 +14,18 @@ function App() {
     )
       .then((res) => res.json())
       .then((data) => {
-        setQuestions(data.results);
+        setQuestions(() => {
+          const questionsArr = data.results.map((el) => {
+            return {
+              ...el,
+              id: nanoid(),
+              all_answers: el.incorrect_answers.concat([el.correct_answer]),
+              selected_answer: "",
+            };
+          });
+          //console.log(resultsArr);
+          return questionsArr;
+        });
       });
   }, [gameCount]);
 
@@ -22,37 +33,32 @@ function App() {
     setGameCount((num) => num + 1);
   }
 
-  function chooseAnswer(e) {
-    const selected = e.target;
-    setQuizForm((prevForm) => {
-      const newForm = {
-        ...prevForm,
-        [selected.id]: {
-          cardID: selected.id,
-          answer: selected.innerHTML,
-          isCorrect:
-            questions[selected.id].correct_answer ===
-            selected.getAttribute("value")
-              ? true
-              : false,
-        },
-      };
-      console.log(newForm);
-      console.log(Object.values(quizForm).length);
-      return newForm;
-    });
-  }
-
   function checkForm() {
     const formArray = Object.values(quizForm);
   }
 
+  function chooseAnswer(id) {
+    console.log("clicked", id);
+  }
+
+  const quizCards = questions.map((question) => {
+    //  console.log(question);
+    return (
+      <QuizCard
+        question={question}
+        key={nanoid()}
+        handleClick={() => chooseAnswer(question.id)}
+      />
+    );
+  });
+
   return (
     <div className="App">
       <Header />
-      <Quizzes questions={questions} handleClick={(e) => chooseAnswer(e)} />
+      <section className="quizzes">
+        <form className="quizzes__form">{quizCards}</form>
+      </section>
       <Panel
-        formIsComplete={Object.values(quizForm).length === questions.length}
         handleNewGame={() => newGame()}
         handleSubmit={() => checkForm()}
       />
