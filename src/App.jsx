@@ -7,6 +7,16 @@ import { nanoid } from "nanoid";
 function App() {
   const [gameCount, setGameCount] = useState(0);
   const [questions, setQuestions] = useState([]);
+  const [quizIsComplete, setQuizIsComplete] = useState(false);
+
+  useEffect(() => {
+    setQuizIsComplete(() => {
+      const answersList = questions.every(
+        (question) => question.selected_answer !== ""
+      );
+      return answersList;
+    });
+  }, [questions]);
 
   useEffect(() => {
     fetch(
@@ -38,9 +48,7 @@ function App() {
   }
 
   function chooseAnswer(e, id) {
-    console.log(e.target.id, id);
     setQuestions((prevState) => {
-      console.log(prevState);
       const newState = prevState.map((el) => {
         console.log(el.id === id);
         if (el.id === id) {
@@ -49,13 +57,11 @@ function App() {
           return el;
         }
       });
-
       return newState;
     });
   }
 
   const quizCards = questions.map((question) => {
-    //  console.log(question);
     return (
       <QuizCard
         question={question}
@@ -71,7 +77,11 @@ function App() {
       <section className="quizzes">
         <form className="quizzes__form">{quizCards}</form>
       </section>
-      <Panel handleNewGame={() => newGame()} handleSubmit={() => checkForm()} />
+      <Panel
+        isComplete={quizIsComplete}
+        handleNewGame={() => newGame()}
+        handleSubmit={() => checkForm()}
+      />
     </div>
   );
 }
