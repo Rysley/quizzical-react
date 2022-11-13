@@ -37,8 +37,21 @@ function App() {
     const formArray = Object.values(quizForm);
   }
 
-  function chooseAnswer(id) {
-    console.log("clicked", id);
+  function chooseAnswer(e, id) {
+    console.log(e.target.id, id);
+    setQuestions((prevState) => {
+      console.log(prevState);
+      const newState = prevState.map((el) => {
+        console.log(el.id === id);
+        if (el.id === id) {
+          return { ...el, selected_answer: e.target.id };
+        } else {
+          return el;
+        }
+      });
+
+      return newState;
+    });
   }
 
   const quizCards = questions.map((question) => {
@@ -47,7 +60,7 @@ function App() {
       <QuizCard
         question={question}
         key={nanoid()}
-        handleClick={() => chooseAnswer(question.id)}
+        handleClick={(e) => chooseAnswer(e, question.id)}
       />
     );
   });
@@ -58,10 +71,7 @@ function App() {
       <section className="quizzes">
         <form className="quizzes__form">{quizCards}</form>
       </section>
-      <Panel
-        handleNewGame={() => newGame()}
-        handleSubmit={() => checkForm()}
-      />
+      <Panel handleNewGame={() => newGame()} handleSubmit={() => checkForm()} />
     </div>
   );
 }

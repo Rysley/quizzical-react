@@ -1,22 +1,19 @@
-import React from "react";
 import { nanoid } from "nanoid";
 
 export default function QuizCard(props) {
   const data = props.question;
   const allAnswers = data.all_answers;
-
   const answerBtns = allAnswers.map((answer) => {
     return (
       <div
-        className="quiz__answer-btn btn"
-        /* className={`quiz__answer-btn btn ${
-          answer === props.question[id].all_answers ? "quiz__answer-btn--clicked" : ""
-        }`} */
-        form={props.form}
+        className={`quiz__answer-btn btn ${
+          answer === props.question.selected_answer
+            ? "quiz__answer-btn--clicked"
+            : ""
+        }`}
         onClick={props.handleClick}
-        value={answer}
         key={nanoid()}
-        id={props.id}
+        id={answer}
       >
         {answer}
       </div>
