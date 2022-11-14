@@ -5,36 +5,29 @@ export default function QuizCard(props) {
   const data = props.question;
   const allAnswers = data.all_answers;
 
-  const styles = {
-    correct: { backgroundColor: "#3dd13d" },
-    wrong: { backgroundColor: "#eb8d8d " },
-    none: { color: "" },
-  };
-
   const answerBtns = allAnswers.map((answer) => {
+    let resultStyles;
+    const isSelected = answer === data.selected_answer;
+    const isCorrect = answer == data.correct_answer;
+
+    if (isSelected && isCorrect) {
+      resultStyles = {
+        backgroundColor: "green",
+      };
+    } else if (isSelected && !isCorrect) {
+      resultStyles = {
+        backgroundColor: "red",
+      };
+    }
+
     return (
       <div
-        className={`quiz__answer-btn btn
-         ${
-           answer === props.question.selected_answer && !props.isChecked
-             ? "quiz__answer-btn--clicked"
-             : ""
-         }
+        className={`quiz__answer-btn btn btn-disabled
+         ${isSelected && !props.isChecked ? "quiz__answer-btn--clicked" : null}
             `}
         onClick={props.handleClick}
         key={nanoid()}
-        style={
-          props.isChecked &&
-          answer === props.question.selected_answer &&
-          answer === props.question.correct_answer
-            ? styles.correct
-            : styles.none &&
-              props.isChecked &&
-              answer === props.question.selected_answer &&
-              answer !== props.question.correct_answer
-            ? styles.wrong
-            : styles.none
-        }
+        style={props.isChecked ? resultStyles : null}
         id={answer}
       >
         {answer}

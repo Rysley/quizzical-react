@@ -38,9 +38,9 @@ function App() {
   }, [gameCount]);
 
   function newGame() {
-    setGameCount((num) => num + 1);
     setQuizIsChecked(false);
     setQuizIsComplete(false);
+    setGameCount((num) => num + 1);
   }
 
   function chooseAnswer(e, id) {
