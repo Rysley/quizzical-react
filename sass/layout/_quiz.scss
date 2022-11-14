@@ -19,7 +19,17 @@
     min-width: 15rem;
 
     &--clicked {
-      background-color: $color-green;
+      outline: rgba(58, 169, 184, 0.712) dashed 3px;
+      outline-offset: 2px;
+      //background-color: rgba(58, 169, 184, 0.712);
+    }
+
+    &--wrong {
+      background-color: $color-red;
+    }
+
+    &--correct {
+      background-color: $color-green-bright;
     }
 
     &:last-child {
@@ -28,7 +38,7 @@
   }
 
   &:hover &__answer-btn:not(:hover) {
-    transform: scale(0.96);
-    box-shadow: 0 0.3rem 5rem rgba($color-black, 0.2);
+    //transform: scale(0.96);
+   // box-shadow: 0 0.3rem 5rem rgba($color-black, 0.2);
   }
 }

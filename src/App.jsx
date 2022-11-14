@@ -8,14 +8,12 @@ function App() {
   const [gameCount, setGameCount] = useState(0);
   const [questions, setQuestions] = useState([]);
   const [quizIsComplete, setQuizIsComplete] = useState(false);
+  const [quizIsChecked, setQuizIsChecked] = useState(false);
 
   useEffect(() => {
-    setQuizIsComplete(() => {
-      const answersList = questions.every(
-        (question) => question.selected_answer !== ""
-      );
-      return answersList;
-    });
+    setQuizIsComplete(() =>
+      questions.every((question) => question.selected_answer !== "")
+    );
   }, [questions]);
 
   useEffect(() => {
@@ -41,16 +39,13 @@ function App() {
 
   function newGame() {
     setGameCount((num) => num + 1);
-  }
-
-  function checkForm() {
-    const formArray = Object.values(quizForm);
+    setQuizIsChecked(false);
+    setQuizIsComplete(false);
   }
 
   function chooseAnswer(e, id) {
     setQuestions((prevState) => {
       const newState = prevState.map((el) => {
-        console.log(el.id === id);
         if (el.id === id) {
           return { ...el, selected_answer: e.target.id };
         } else {
@@ -61,9 +56,14 @@ function App() {
     });
   }
 
+  function checkQuiz() {
+    if (quizIsComplete) setQuizIsChecked(true);
+  }
+
   const quizCards = questions.map((question) => {
     return (
       <QuizCard
+        isChecked={quizIsChecked}
         question={question}
         key={nanoid()}
         handleClick={(e) => chooseAnswer(e, question.id)}
@@ -80,7 +80,7 @@ function App() {
       <Panel
         isComplete={quizIsComplete}
         handleNewGame={() => newGame()}
-        handleSubmit={() => checkForm()}
+        handleSubmit={() => checkQuiz()}
       />
     </div>
   );
