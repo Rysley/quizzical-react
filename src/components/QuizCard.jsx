@@ -23,7 +23,7 @@ export default function QuizCard(props) {
     return (
       <div
         className={`quiz__answer-btn btn btn-disabled
-         ${isSelected && !props.isChecked ? "quiz__answer-btn--clicked" : null}
+         ${!props.isChecked && isSelected ? "quiz__answer-btn--clicked" : null}
             `}
         onClick={props.handleClick}
         key={nanoid()}

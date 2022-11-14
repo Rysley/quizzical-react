@@ -9,6 +9,7 @@ function App() {
   const [questions, setQuestions] = useState([]);
   const [quizIsComplete, setQuizIsComplete] = useState(false);
   const [quizIsChecked, setQuizIsChecked] = useState(false);
+  const [score, setScore] = useState({});
 
   useEffect(() => {
     setQuizIsComplete(() =>
@@ -58,6 +59,17 @@ function App() {
 
   function checkQuiz() {
     if (quizIsComplete) setQuizIsChecked(true);
+
+    const totalCorrect = questions.filter(
+      (q) => q.selected_answer === q.correct_answer
+    );
+    setScore(() => {
+      return {
+        numCorrectAnswers: totalCorrect.length,
+        totalQuestions: questions.length,
+      };
+    });
+    console.log(score);
   }
 
   const quizCards = questions.map((question) => {
@@ -79,6 +91,8 @@ function App() {
       </section>
       <Panel
         isComplete={quizIsComplete}
+        isChecked={quizIsChecked}
+        score={score}
         handleNewGame={() => newGame()}
         handleSubmit={() => checkQuiz()}
       />
