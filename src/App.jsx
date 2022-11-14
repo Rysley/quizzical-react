@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Header from "./components/Header";
 import QuizCard from "./components/QuizCard";
 import Panel from "./components/Panel";
+import arrayShuffle from "array-shuffle";
 import { nanoid } from "nanoid";
 
 function App() {
@@ -28,7 +29,9 @@ function App() {
             return {
               ...el,
               id: nanoid(),
-              all_answers: el.incorrect_answers.concat([el.correct_answer]),
+              all_answers: arrayShuffle(
+                el.incorrect_answers.concat([el.correct_answer])
+              ),
               selected_answer: "",
             };
           });
@@ -41,6 +44,7 @@ function App() {
   function newGame() {
     setQuizIsChecked(false);
     setQuizIsComplete(false);
+    setScore({});
     setGameCount((num) => num + 1);
   }
 
@@ -63,13 +67,12 @@ function App() {
     const totalCorrect = questions.filter(
       (q) => q.selected_answer === q.correct_answer
     );
-    setScore(() => {
-      return {
-        numCorrectAnswers: totalCorrect.length,
-        totalQuestions: questions.length,
-      };
-    });
-    console.log(score);
+
+    setScore((prevState) => ({
+      ...prevState,
+      numCorrectAnswers: totalCorrect.length,
+      totalQuestions: questions.length,
+    }));
   }
 
   const quizCards = questions.map((question) => {
