@@ -4,6 +4,7 @@ import QuizCard from "./components/QuizCard";
 import Panel from "./components/Panel";
 import arrayShuffle from "array-shuffle";
 import { nanoid } from "nanoid";
+import Confetti from "react-confetti";
 
 function App() {
   const [gameCount, setGameCount] = useState(0);
@@ -19,23 +20,24 @@ function App() {
   }, [questions]);
 
   useEffect(() => {
-    fetch(
-      `https://opentdb.com/api.php?amount=5&difficulty=medium&type=multiple`
-    )
+    fetch(`https://opentdb.com/api.php?amount=4&difficulty=easy&type=multiple`)
       .then((res) => res.json())
       .then((data) => {
         setQuestions(() => {
           const questionsArr = data.results.map((el) => {
             return {
               ...el,
+              question: el.question,
               id: nanoid(),
+              correct_answer: el.correct_answer,
+              incorrect_answers: el.incorrect_answers,
               all_answers: arrayShuffle(
                 el.incorrect_answers.concat([el.correct_answer])
               ),
               selected_answer: "",
             };
           });
-          //console.log(resultsArr);
+          console.log(questionsArr);
           return questionsArr;
         });
       });
@@ -89,6 +91,9 @@ function App() {
   return (
     <div className="App">
       <Header />
+      {score.numCorrectAnswers >= 0.6 * score.totalQuestions ? (
+        <Confetti />
+      ) : null}
       <section className="quizzes">
         <form className="quizzes__form">{quizCards}</form>
       </section>

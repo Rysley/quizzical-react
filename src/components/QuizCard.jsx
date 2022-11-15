@@ -1,5 +1,6 @@
 import React from "react";
 import { nanoid } from "nanoid";
+import { Interweave } from "interweave";
 
 export default function QuizCard(props) {
   const data = props.question;
@@ -13,6 +14,10 @@ export default function QuizCard(props) {
     if (isSelected && isCorrect) {
       resultStyles = {
         backgroundColor: "green",
+      };
+    } else if (!isSelected && isCorrect) {
+      resultStyles = {
+        backgroundColor: "rgba(0, 255, 0, 0.15)",
       };
     } else if (isSelected && !isCorrect) {
       resultStyles = {
@@ -37,7 +42,9 @@ export default function QuizCard(props) {
 
   return (
     <div className="quiz">
-      <h4 className="quiz__question">{data.question}</h4>
+      <h4 className="quiz__question">
+        {<Interweave content={data.question} />}
+      </h4>
       <div className="quiz__buttons">{answerBtns}</div>
     </div>
   );
