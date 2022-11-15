@@ -13,7 +13,7 @@ export default function QuizCard(props) {
 
     if (isSelected && isCorrect) {
       resultStyles = {
-        backgroundColor: "green",
+        backgroundColor: "#73e273d0",
       };
     } else if (!isSelected && isCorrect) {
       resultStyles = {
@@ -21,7 +21,7 @@ export default function QuizCard(props) {
       };
     } else if (isSelected && !isCorrect) {
       resultStyles = {
-        backgroundColor: "red",
+        backgroundColor: "#eb8d8d",
       };
     }
 

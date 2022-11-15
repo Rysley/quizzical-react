@@ -1,14 +1,43 @@
 .panel {
-  display: flex;
-  justify-content: space-around;
+  display: grid;
+  grid-template-columns: 3fr 5fr 2fr 1fr;
+  justify-content: center;
   align-items: center;
-  height: 10rem;
+  height: auto;
+  padding: 1rem;
   background-color: $color-red;
 
   &__new-game {
+    display: inline-block;
     background-color: rgb(117, 207, 207);
+    grid-column-start: 3;
     font-size: 2.5em;
+    margin-left: 4rem;
+    height: fit-content;
+  }
+
+  &__restart {
+    display: block;
+    background-color: rgb(117, 207, 207);
+    grid-column-start: 2;
+    font-size: 2.5em;
+    margin-left: 4rem;
+    margin-right: 4rem;
+    height: fit-content;
+  }
+
+  &__check-game {
+    display: block;
+    background-color: rgb(117, 207, 207);
+    grid-column-start: 2;
+    font-size: 2.5em;
+    height: fit-content;
+  }
+
+  &__result-info {
+    display: block;
+    grid-column-start: 2;
+    font-size: 4rem;
+    color: $color-white;
   }
 }
-
-

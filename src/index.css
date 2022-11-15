@@ -29,7 +29,7 @@ body {
   padding: 1rem;
   margin-top: 5rem;
   background-color: #eb8d8d;
-  color: #021b1b; }
+  color: #fff2f2; }
 
 .quizzes {
   background-color: #e0e0e0;
@@ -66,14 +66,39 @@ body {
       margin-right: 0; }
 
 .panel {
-  display: flex;
-  justify-content: space-around;
+  display: grid;
+  grid-template-columns: 3fr 5fr 2fr 1fr;
+  justify-content: center;
   align-items: center;
-  height: 10rem;
+  height: auto;
+  padding: 1rem;
   background-color: #eb8d8d; }
   .panel__new-game {
+    display: inline-block;
     background-color: #75cfcf;
-    font-size: 2.5em; }
+    grid-column-start: 3;
+    font-size: 2.5em;
+    margin-left: 4rem;
+    height: fit-content; }
+  .panel__restart {
+    display: block;
+    background-color: #75cfcf;
+    grid-column-start: 2;
+    font-size: 2.5em;
+    margin-left: 4rem;
+    margin-right: 4rem;
+    height: fit-content; }
+  .panel__check-game {
+    display: block;
+    background-color: #75cfcf;
+    grid-column-start: 2;
+    font-size: 2.5em;
+    height: fit-content; }
+  .panel__result-info {
+    display: block;
+    grid-column-start: 2;
+    font-size: 4rem;
+    color: #fff2f2; }
 
 :root {
   font-family: Inter, Avenir, Helvetica, Arial, sans-serif; }
