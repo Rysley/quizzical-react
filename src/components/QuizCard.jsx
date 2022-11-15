@@ -17,7 +17,8 @@ export default function QuizCard(props) {
       };
     } else if (!isSelected && isCorrect) {
       resultStyles = {
-        backgroundColor: "rgba(0, 255, 0, 0.15)",
+        outline: "#73e273d0 dashed 5px",
+        outlineOffset: `4px`,
       };
     } else if (isSelected && !isCorrect) {
       resultStyles = {

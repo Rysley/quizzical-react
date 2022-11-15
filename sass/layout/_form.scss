@@ -4,9 +4,13 @@
   justify-content: center;
 
   &__form {
-    width: 80vh;
+    width: auto;
     list-style: none;
     display: inline-block;
     font-size: 1.6rem;
+
+    &:hover .quiz:not(:hover) {
+      filter: grayscale(0.5);
+    }
   }
 }

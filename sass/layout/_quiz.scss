@@ -1,8 +1,11 @@
 .quiz {
   display: block;
+  transition: all ease 0.2s;
 
   &__question {
     text-align: start;
+    margin-left: 8%;
+    height: 3rem;
   }
 
   &__buttons {
@@ -15,21 +18,22 @@
   &__answer-btn {
     font-size: 1.7rem;
     font-weight: 700;
-    margin-right: 1rem;
+    margin-right: 1.3rem;
     min-width: 15rem;
 
     &--clicked {
       outline: rgba(58, 169, 184, 0.712) dashed 3px;
       outline-offset: 2px;
-      //background-color: rgba(58, 169, 184, 0.712);
     }
 
     &--wrong {
-      background-color: $color-red;
+      outline: rgba($color-red, 0.8) dashed 3px;
+      outline-offset: 2px;
     }
 
     &--correct {
-      background-color: $color-green-bright;
+      outline: rgba($color-green-bright, 0.712) dashed 3px;
+      outline-offset: 2px;
     }
 
     &:last-child {
@@ -37,8 +41,8 @@
     }
   }
 
-  &:hover &__answer-btn:not(:hover) {
-    //transform: scale(0.96);
-   // box-shadow: 0 0.3rem 5rem rgba($color-black, 0.2);
-  }
+  /*  &:hover &__answer-btn:not(:hover) {
+    filter: blur(1px);
+    // box-shadow: 0 0.3rem 5rem rgba($color-black, 0.2);
+  } */
 }

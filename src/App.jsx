@@ -88,7 +88,6 @@ function App() {
     );
   });
 
-
   return (
     <div className="App">
       <Header />
@@ -96,7 +95,7 @@ function App() {
         <Confetti />
       ) : null}
       <section className="quizzes">
-        <form className="quizzes__form">{quizCards}</form>
+        <div className="quizzes__form">{quizCards}</div>
       </section>
       <Panel
         isComplete={quizIsComplete}

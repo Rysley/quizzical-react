@@ -21,4 +21,13 @@
 }
 
 .btn-disabled {
+  display: inline-block;
+  text-align: center;
+  border: none;
+  background-color: antiquewhite;
+  padding: 1rem;
+  border-radius: 1.5rem;
+  box-shadow: 0 0.1rem 1rem rgba($color-black, 0.2);
+  transform: translateY(0);
+  transition: all 0.2s ease;
 }
