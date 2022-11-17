@@ -5,6 +5,7 @@ import Panel from "./components/Panel";
 import arrayShuffle from "array-shuffle";
 import { nanoid } from "nanoid";
 import Confetti from "react-confetti";
+import LoadingSpinner from "./assets/SpinnerCircular";
 
 function App() {
   const [gameCount, setGameCount] = useState(0);
@@ -12,6 +13,7 @@ function App() {
   const [quizIsComplete, setQuizIsComplete] = useState(false);
   const [quizIsChecked, setQuizIsChecked] = useState(false);
   const [score, setScore] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     setQuizIsComplete(() =>
@@ -20,6 +22,7 @@ function App() {
   }, [questions]);
 
   useEffect(() => {
+    toggleSpinner();
     fetch(`https://opentdb.com/api.php?amount=4&difficulty=easy&type=multiple`)
       .then((res) => res.json())
       .then((data) => {
@@ -37,11 +40,15 @@ function App() {
               selected_answer: "",
             };
           });
-          console.log(questionsArr);
+          setIsLoading(false);
           return questionsArr;
         });
       });
   }, [gameCount]);
+
+  function toggleSpinner() {
+    setIsLoading(true);
+  }
 
   function newGame() {
     setQuizIsChecked(false);
@@ -90,6 +97,7 @@ function App() {
 
   return (
     <div className="App">
+      <LoadingSpinner enabled={isLoading} />
       <Header />
       {score.numCorrectAnswers >= 0.6 * score.totalQuestions ? (
         <Confetti />

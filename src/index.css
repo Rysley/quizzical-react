@@ -35,6 +35,13 @@ body {
   transform: translateY(0);
   transition: all 0.2s ease; }
 
+.spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10; }
+
 .header {
   text-align: center;
   font-size: 4rem;
@@ -47,7 +54,9 @@ body {
 .quizzes {
   background-color: #e0e0e0;
   display: flex;
-  justify-content: center; }
+  justify-content: center;
+  position: relative;
+  min-height: 80vh; }
   .quizzes__form {
     width: auto;
     list-style: none;
@@ -135,3 +144,6 @@ body {
 
 html {
   font-size: 10px; }
+
+window {
+  position: relative; }
