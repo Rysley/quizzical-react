@@ -38,14 +38,16 @@ function App() {
                     return {
                       answer: incAnswer,
                       isCorrect: false,
-                      answerID: nanoid(),
+                      isSelected: false,
+                      id: nanoid(),
                     };
                   })
                   .concat([
                     {
                       answer: el.correct_answer,
                       isCorrect: true,
-                      answerID: nanoid(),
+                      isSelected: false,
+                      id: nanoid(),
                     },
                   ])
               ),
@@ -117,7 +119,7 @@ function App() {
         <Confetti />
       ) : null}
       <section className="quizzes">
-        <div className="quizzes__form">{quizCards}</div>
+        <div className="quizzes__form">{/* quizCards */}</div>
       </section>
       <Panel
         isComplete={quizIsComplete}

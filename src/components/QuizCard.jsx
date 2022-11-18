@@ -6,10 +6,10 @@ export default function QuizCard(props) {
   const data = props.question;
   const allAnswers = data.all_answers;
 
-  const answerBtns = allAnswers.map((answer) => {
+  const answerBtns = allAnswers.map((answer) => {z
     let resultStyles;
-    const isSelected = answer.answer === data.selected_answer;
-    const isCorrect = answer.answer == data.correct_answer;
+    const isSelected = answer === data.selected_answer;
+    const isCorrect = answer == data.correct_answer;
 
     if (isSelected && isCorrect) {
       resultStyles = {
@@ -34,9 +34,9 @@ export default function QuizCard(props) {
         onClick={props.handleClick}
         key={nanoid()}
         style={props.isChecked ? resultStyles : null}
-        id={answer.id}
+        id={answer}
       >
-        {answer.answer}
+        {answer}
       </div>
     );
   });
