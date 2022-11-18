@@ -6,10 +6,13 @@ export default function QuizCard(props) {
   const data = props.question;
   const allAnswers = data.all_answers;
 
-  const answerBtns = allAnswers.map((answer) => {z
+  const answerBtns = allAnswers.map((answer) => {
     let resultStyles;
-    const isSelected = answer === data.selected_answer;
-    const isCorrect = answer == data.correct_answer;
+    //console.log(answer, props);
+    //const renderedAnswer = <Interweave content={answer.answer} />;
+    //console.log(renderedAnswer);
+    const isSelected = answer.id === data.selected_answer;
+    const isCorrect = answer.id === data.correct_answer;
 
     if (isSelected && isCorrect) {
       resultStyles = {
@@ -34,15 +37,15 @@ export default function QuizCard(props) {
         onClick={props.handleClick}
         key={nanoid()}
         style={props.isChecked ? resultStyles : null}
-        id={answer}
+        id={answer.id}
       >
-        {answer}
+        {answer.answer}
       </div>
     );
   });
 
   return (
-    <div className="quiz">
+    <div className="quiz" id={props.id}>
       <h4 className="quiz__question">
         {<Interweave content={data.question} />}
       </h4>

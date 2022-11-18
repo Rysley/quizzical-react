@@ -28,6 +28,7 @@ function App() {
       .then((data) => {
         setQuestions(() => {
           const questionsArr = data.results.map((el) => {
+            const correctID = nanoid();
             return {
               ...el,
               question: el.question,
@@ -38,7 +39,6 @@ function App() {
                     return {
                       answer: incAnswer,
                       isCorrect: false,
-                      isSelected: false,
                       id: nanoid(),
                     };
                   })
@@ -46,13 +46,13 @@ function App() {
                     {
                       answer: el.correct_answer,
                       isCorrect: true,
-                      isSelected: false,
-                      id: nanoid(),
+                      id: correctID,
                     },
                   ])
               ),
 
               selected_answer: "",
+              correct_answer: correctID,
             };
           });
           setIsLoading(false);
@@ -89,9 +89,9 @@ function App() {
   function checkQuiz() {
     if (quizIsComplete) setQuizIsChecked(true);
 
-    const totalCorrect = questions.filter(
-      (q) => q.selected_answer === q.correct_answer
-    );
+    const totalCorrect = questions.filter((q) => {
+      return q.selected_answer === q.correct_answer;
+    });
 
     setScore((prevState) => ({
       ...prevState,
@@ -105,7 +105,8 @@ function App() {
       <QuizCard
         isChecked={quizIsChecked}
         question={question}
-        key={nanoid()}
+        key={question.id}
+        /*  id={question.id} */
         handleClick={(e) => chooseAnswer(e, question.id)}
       />
     );
@@ -119,7 +120,7 @@ function App() {
         <Confetti />
       ) : null}
       <section className="quizzes">
-        <div className="quizzes__form">{/* quizCards */}</div>
+        <div className="quizzes__form">{quizCards}</div>
       </section>
       <Panel
         isComplete={quizIsComplete}
