@@ -22,7 +22,7 @@ function App() {
   }, [questions]);
 
   useEffect(() => {
-    toggleSpinner();
+    renderSpinner();
     fetch(`https://opentdb.com/api.php?amount=4&difficulty=easy&type=multiple`)
       .then((res) => res.json())
       .then((data) => {
@@ -32,21 +32,35 @@ function App() {
               ...el,
               question: el.question,
               id: nanoid(),
-              correct_answer: el.correct_answer,
-              incorrect_answers: el.incorrect_answers,
               all_answers: arrayShuffle(
-                el.incorrect_answers.concat([el.correct_answer])
+                el.incorrect_answers
+                  .map((incAnswer) => {
+                    return {
+                      answer: incAnswer,
+                      isCorrect: false,
+                      answerID: nanoid(),
+                    };
+                  })
+                  .concat([
+                    {
+                      answer: el.correct_answer,
+                      isCorrect: true,
+                      answerID: nanoid(),
+                    },
+                  ])
               ),
+
               selected_answer: "",
             };
           });
           setIsLoading(false);
+          console.log(questionsArr);
           return questionsArr;
         });
       });
   }, [gameCount]);
 
-  function toggleSpinner() {
+  function renderSpinner() {
     setIsLoading(true);
   }
 
