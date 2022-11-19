@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Welcome from "./components/Welcome";
 import Header from "./components/Header";
 import QuizCard from "./components/QuizCard";
 import Panel from "./components/Panel";
@@ -9,6 +10,12 @@ import LoadingSpinner from "./assets/SpinnerCircular";
 
 function App() {
   const [gameCount, setGameCount] = useState(0);
+  const [quizForm, setQuizForm] = useState({
+    amount: 4,
+    difficulty: "easy",
+    category: "",
+    isSubmitted: false,
+  });
   const [questions, setQuestions] = useState([]);
   const [quizIsComplete, setQuizIsComplete] = useState(false);
   const [quizIsChecked, setQuizIsChecked] = useState(false);
@@ -23,7 +30,9 @@ function App() {
 
   useEffect(() => {
     renderSpinner();
-    fetch(`https://opentdb.com/api.php?amount=4&difficulty=easy&type=multiple`)
+    fetch(
+      `https://opentdb.com/api.php?amount=${quizForm.amount}&category=${quizForm.category}&difficulty=${quizForm.difficulty}&type=multiple`
+    )
       .then((res) => res.json())
       .then((data) => {
         setQuestions(() => {
@@ -56,7 +65,6 @@ function App() {
             };
           });
           setIsLoading(false);
-          console.log(questionsArr);
           return questionsArr;
         });
       });
@@ -89,10 +97,9 @@ function App() {
   function checkQuiz() {
     if (quizIsComplete) setQuizIsChecked(true);
 
-    const totalCorrect = questions.filter((q) => {
-
-      return q.selected_answer === q.correct_answer;
-    });
+    const totalCorrect = questions.filter(
+      (q) => q.selected_answer === q.correct_answer
+    );
 
     setScore((prevState) => ({
       ...prevState,
@@ -117,19 +124,24 @@ function App() {
     <div className="App">
       <LoadingSpinner enabled={isLoading} />
       <Header />
+      {!quizForm.isSubmitted && <Welcome />}
       {score.numCorrectAnswers >= 0.6 * score.totalQuestions ? (
         <Confetti />
       ) : null}
-      <section className="quizzes">
-        <div className="quizzes__form">{quizCards}</div>
-      </section>
-      <Panel
-        isComplete={quizIsComplete}
-        isChecked={quizIsChecked}
-        score={score}
-        handleNewGame={() => newGame()}
-        handleSubmit={() => checkQuiz()}
-      />
+      {quizForm.isSubmitted && (
+        <section className="quizzes">
+          <div className="quizzes__form">{quizCards}</div>
+        </section>
+      )}
+      {quizForm.isSubmitted && (
+        <Panel
+          isComplete={quizIsComplete}
+          isChecked={quizIsChecked}
+          score={score}
+          handleNewGame={() => newGame()}
+          handleSubmit={() => checkQuiz()}
+        />
+      )}
     </div>
   );
 }
