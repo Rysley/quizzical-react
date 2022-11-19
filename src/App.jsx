@@ -90,6 +90,7 @@ function App() {
     if (quizIsComplete) setQuizIsChecked(true);
 
     const totalCorrect = questions.filter((q) => {
+
       return q.selected_answer === q.correct_answer;
     });
 
