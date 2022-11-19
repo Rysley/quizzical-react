@@ -1,9 +1,11 @@
 import React from "react";
 import { Carousel } from "react-carousel3";
+import logo from "../assets/react.svg";
 
 const style = {
-  width: 297,
-  height: 296,
+  width: "auto",
+  height: "auto",
+  cursor: "pointer",
 };
 
 export default function Welcome() {
@@ -17,24 +19,41 @@ export default function Welcome() {
         style={{
           display: "flex",
           justifyContent: "center",
-          background: "linear-gradient(to bottom, #16235e 0%, #020223 100%)",
+          background:
+            "transparent" /* "linear-gradient(to bottom, #16235e 0%, #020223 100%)" */,
         }}
       >
         <Carousel
           height={460}
           width={980}
-          yOrigin={42}
-          yRadius={48}
-          autoPlay={true}
+          yOrigin={10}
+          yRadius={70}
+          autoPlay={false}
         >
           <div key={1} style={style}>
-            <img alt="" src="../assets/images/airbnb.png" />
+            <span>ART</span>
+            <img
+              src={logo}
+              alt="react"
+              style={{ marginRight: "2rem" }}
+              onClick={console.log("click")}
+            />
           </div>
           <div key={2} style={style}>
-            <img alt="" src="../assets/images/apple.png" />
+            <span>SPORT</span>
+            <img src={logo} alt="react" style={{ marginRight: "2rem" }} />
           </div>
           <div key={3} style={style}>
-            <img alt="" src="../assets/images/react.png" />
+            <span>SCIENCE</span>
+            <img src={logo} alt="react" style={{ marginRight: "2rem" }} />
+          </div>
+          <div key={4} style={style}>
+            <span>CINEMA</span>
+            <img src={logo} alt="react" style={{ marginRight: "2rem" }} />
+          </div>
+          <div key={5} style={style}>
+            <span>HISTORY</span>
+            <img src={logo} alt="react" style={{ marginRight: "2rem" }} />
           </div>
         </Carousel>
       </div>
