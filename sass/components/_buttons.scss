@@ -5,14 +5,14 @@
   background-color: antiquewhite;
   padding: 1rem;
   border-radius: 1.5rem;
-  box-shadow: 0 0.1rem 1rem rgba($color-black, 0.2);
+  box-shadow: $shadow-light;
   transform: translateY(0);
   transition: all 0.2s ease;
 
   &:hover {
     cursor: pointer;
     transform: translateY(-2px);
-    box-shadow: 0 0.5rem 2rem rgba($color-black, 0.2);
+    box-shadow: $shadow-medium;
   }
 
   &:active {
@@ -27,7 +27,7 @@
   background-color: antiquewhite;
   padding: 1rem;
   border-radius: 1.5rem;
-  box-shadow: 0 0.1rem 1rem rgba($color-black, 0.2);
+  box-shadow: $shadow-light;
   transform: translateY(0);
   transition: all 0.2s ease;
 }

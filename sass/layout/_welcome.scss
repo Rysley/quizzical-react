@@ -1,0 +1,67 @@
+.welcome {
+  display: grid;
+  justify-content: center;
+  grid-template-columns: 5vh 90vh 5vh;
+
+  &__subtitle {
+    display: inline-block;
+    justify-content: center;
+    width: 100%;
+    text-align: center;
+  }
+
+  &__menu-description {
+    display: inline-block;
+    text-align: start;
+    width: 60%;
+    cursor: pointer;
+  }
+
+  &__carousel {
+    display: flex;
+    justify-content: center;
+
+    &-element {
+      color: rgb(77, 124, 7);
+    }
+  }
+
+  &__new-game {
+    display: inline-block;
+    justify-self: center;
+    background-color: $color-gray;
+    grid-column-start: 2;
+    font-size: 2.5em;
+    height: 5rem;
+    margin-top: 20vh;
+    width: 50%;
+  }
+}
+
+.form {
+  display: flex;
+  justify-content: center;
+
+  &__select {
+    appearance: none;
+    line-height: 2rem;
+    width: 50%;
+    padding: 1rem;
+    font-family: inherit;
+    border: 2px #26262681 dashed;
+    background-color: antiquewhite;
+
+    &::-webkit-scrollbar-thumb {
+      background: red;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: red;
+      border-radius: 10px;
+    }
+  }
+}
+
+.u-grid-start-2 {
+  grid-column-start: 2;
+}

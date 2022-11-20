@@ -74,10 +74,14 @@ function App() {
     setIsLoading(true);
   }
 
-  function newGame() {
+  function newGame(startData) {
     setQuizIsChecked(false);
     setQuizIsComplete(false);
     setScore({});
+    console.log(startData);
+    setQuizForm((prevData) => {
+      return { ...prevData, ...startData, isSubmitted: true };
+    });
     setGameCount((num) => num + 1);
   }
 
@@ -124,7 +128,9 @@ function App() {
     <div className="App">
       <LoadingSpinner enabled={isLoading} />
       <Header />
-      {!quizForm.isSubmitted && <Welcome />}
+      {!quizForm.isSubmitted && (
+        <Welcome handleStartQuiz={(formData) => newGame(formData)} />
+      )}
       {score.numCorrectAnswers >= 0.6 * score.totalQuestions ? (
         <Confetti />
       ) : null}
