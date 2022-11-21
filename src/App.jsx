@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Welcome from "./components/Welcome";
 import Header from "./components/Header";
 import QuizCard from "./components/QuizCard";
 import Panel from "./components/Panel";
@@ -9,6 +10,12 @@ import LoadingSpinner from "./assets/SpinnerCircular";
 
 function App() {
   const [gameCount, setGameCount] = useState(0);
+  const [quizForm, setQuizForm] = useState({
+    amount: 4,
+    difficulty: "easy",
+    category: "",
+    isSubmitted: false,
+  });
   const [questions, setQuestions] = useState([]);
   const [quizIsComplete, setQuizIsComplete] = useState(false);
   const [quizIsChecked, setQuizIsChecked] = useState(false);
@@ -22,22 +29,39 @@ function App() {
   }, [questions]);
 
   useEffect(() => {
-    toggleSpinner();
-    fetch(`https://opentdb.com/api.php?amount=4&difficulty=easy&type=multiple`)
+    renderSpinner();
+    fetch(
+      `https://opentdb.com/api.php?amount=${quizForm.amount}&category=${quizForm.category}&difficulty=${quizForm.difficulty}&type=multiple`
+    )
       .then((res) => res.json())
       .then((data) => {
         setQuestions(() => {
           const questionsArr = data.results.map((el) => {
+            const correctID = nanoid();
             return {
               ...el,
               question: el.question,
               id: nanoid(),
-              correct_answer: el.correct_answer,
-              incorrect_answers: el.incorrect_answers,
               all_answers: arrayShuffle(
-                el.incorrect_answers.concat([el.correct_answer])
+                el.incorrect_answers
+                  .map((incAnswer) => {
+                    return {
+                      answer: incAnswer,
+                      isCorrect: false,
+                      id: nanoid(),
+                    };
+                  })
+                  .concat([
+                    {
+                      answer: el.correct_answer,
+                      isCorrect: true,
+                      id: correctID,
+                    },
+                  ])
               ),
+
               selected_answer: "",
+              correct_answer: correctID,
             };
           });
           setIsLoading(false);
@@ -46,14 +70,18 @@ function App() {
       });
   }, [gameCount]);
 
-  function toggleSpinner() {
+  function renderSpinner() {
     setIsLoading(true);
   }
 
-  function newGame() {
+  function newGame(startData) {
     setQuizIsChecked(false);
     setQuizIsComplete(false);
     setScore({});
+    console.log(startData);
+    setQuizForm((prevData) => {
+      return { ...prevData, ...startData, isSubmitted: true };
+    });
     setGameCount((num) => num + 1);
   }
 
@@ -89,7 +117,8 @@ function App() {
       <QuizCard
         isChecked={quizIsChecked}
         question={question}
-        key={nanoid()}
+        key={question.id}
+        /*  id={question.id} */
         handleClick={(e) => chooseAnswer(e, question.id)}
       />
     );
@@ -99,19 +128,26 @@ function App() {
     <div className="App">
       <LoadingSpinner enabled={isLoading} />
       <Header />
+      {!quizForm.isSubmitted && (
+        <Welcome handleStartQuiz={(formData) => newGame(formData)} />
+      )}
       {score.numCorrectAnswers >= 0.6 * score.totalQuestions ? (
         <Confetti />
       ) : null}
-      <section className="quizzes">
-        <div className="quizzes__form">{quizCards}</div>
-      </section>
-      <Panel
-        isComplete={quizIsComplete}
-        isChecked={quizIsChecked}
-        score={score}
-        handleNewGame={() => newGame()}
-        handleSubmit={() => checkQuiz()}
-      />
+      {quizForm.isSubmitted && (
+        <section className="quizzes">
+          <div className="quizzes__form">{quizCards}</div>
+        </section>
+      )}
+      {quizForm.isSubmitted && (
+        <Panel
+          isComplete={quizIsComplete}
+          isChecked={quizIsChecked}
+          score={score}
+          handleNewGame={() => newGame()}
+          handleSubmit={() => checkQuiz()}
+        />
+      )}
     </div>
   );
 }

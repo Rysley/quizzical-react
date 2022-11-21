@@ -51,6 +51,65 @@ body {
   background-color: #fff2f2;
   color: #262626; }
 
+.welcome {
+  display: grid;
+  justify-content: center;
+  grid-template-columns: 5vh 90vh 5vh; }
+  .welcome__subtitle {
+    display: inline-block;
+    justify-content: center;
+    width: 100%;
+    text-align: center; }
+  .welcome__menu-description {
+    display: inline-block;
+    text-align: start;
+    width: 60%;
+    cursor: pointer; }
+  .welcome__carousel {
+    display: flex;
+    justify-content: center; }
+    .welcome__carousel-element {
+      width: "auto";
+      height: "auto";
+      cursor: pointer;
+      font-size: 3rem;
+      transition: all 0.2s; }
+      .welcome__carousel-element:hover {
+        color: #eb8d8d;
+        font-size: 3.5rem; }
+      .welcome__carousel-element:active {
+        font-size: 3.3rem; }
+  .welcome__new-game {
+    display: inline-block;
+    justify-self: center;
+    background-color: #e0e0e0;
+    grid-column-start: 2;
+    font-size: 2.5em;
+    height: 5rem;
+    margin-top: 20vh;
+    width: 50%; }
+
+.form {
+  display: flex;
+  justify-content: center; }
+  .form__select {
+    appearance: none;
+    line-height: 2rem;
+    width: 50%;
+    padding: 1rem;
+    font-family: inherit;
+    border: 2px #26262681 dashed;
+    background-color: antiquewhite; }
+    .form__select::-webkit-scrollbar {
+      width: 20px;
+      background-color: rgba(250, 235, 215, 0.322); }
+      .form__select::-webkit-scrollbar-thumb {
+        background: rgba(211, 160, 160, 0.74);
+        border-radius: 10px; }
+
+.u-grid-start-2 {
+  grid-column-start: 2; }
+
 .quizzes {
   background-color: #e0e0e0;
   display: flex;

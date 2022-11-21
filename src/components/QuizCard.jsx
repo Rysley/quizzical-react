@@ -1,5 +1,6 @@
 import React from "react";
 import { nanoid } from "nanoid";
+import parse from "html-react-parser";
 
 export default function QuizCard(props) {
   const data = props.question;
@@ -7,8 +8,10 @@ export default function QuizCard(props) {
 
   const answerBtns = allAnswers.map((answer) => {
     let resultStyles;
-    const isSelected = answer === data.selected_answer;
-    const isCorrect = answer == data.correct_answer;
+
+    console.log(answer);
+    const isSelected = answer.id === data.selected_answer;
+    const isCorrect = answer.id === data.correct_answer;
 
     if (isSelected && isCorrect) {
       resultStyles = {
@@ -33,16 +36,16 @@ export default function QuizCard(props) {
         onClick={props.handleClick}
         key={nanoid()}
         style={props.isChecked ? resultStyles : null}
-        id={answer}
+        id={answer.id}
       >
-        {answer}
+        {parse(answer.answer)}
       </div>
     );
   });
 
   return (
-    <div className="quiz">
-      <h4 className="quiz__question">{data.question}</h4>
+    <div className="quiz" id={props.id}>
+      <h4 className="quiz__question">{parse(data.question)}</h4>
       <div className="quiz__buttons">{answerBtns}</div>
     </div>
   );
