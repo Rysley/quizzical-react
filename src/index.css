@@ -43,13 +43,69 @@ body {
   z-index: 10; }
 
 .header {
+  position: relative;
   text-align: center;
-  font-size: 4rem;
-  font-weight: 700;
   letter-spacing: 0.2rem;
-  padding: 1.5rem;
   background-color: #fff2f2;
-  color: #262626; }
+  color: #262626;
+  padding: 1.5rem;
+  transition: all 2s ease; }
+  .header__title {
+    display: inline-block;
+    font-size: 4rem;
+    font-weight: 700; }
+  .header__small {
+    position: absolute;
+    top: 14rem;
+    padding: 1.4rem;
+    padding-top: 0.5rem;
+    padding-bottom: 3rem;
+    right: 0;
+    transform: translate(-25%, 0%);
+    color: #262626;
+    background-color: #f1f180;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    z-index: 0;
+    filter: opacity(0);
+    animation: slidein 13s; }
+
+@keyframes slidein {
+  0% {
+    transform: translate(100%, -50%);
+    filter: opacity(0.7); }
+  9% {
+    transform: translate(-30%, -50%); }
+  15% {
+    transform: translate(-25%, -50%); }
+  50% {
+    transform: translate(-25%, -50%); }
+  51% {
+    transform: translate(-25%, -40%); }
+  52% {
+    transform: translate(-25%, -50%); }
+  76% {
+    transform: translate(-25%, -50%); }
+  77% {
+    transform: translate(-25%, -40%) rotate(3deg); }
+  78% {
+    transform: translate(-25%, -50%) rotate(3deg); }
+  79% {
+    transform: translate(-25%, -40%) rotate(3deg); }
+  80% {
+    transform: translate(-25%, -50%) rotate(3deg); }
+  89% {
+    transform: translate(-25%, -50%) rotate(-3deg); }
+  90% {
+    transform: translate(-25%, -40%) rotate(-3deg); }
+  91% {
+    transform: translate(-25%, -50%) rotate(-2deg); }
+  99% {
+    transform: translate(-25%, -48%);
+    filter: opacity(0.7); }
+  100% {
+    transform: translate(-25%, 0%);
+    filter: opacity(0); } }
 
 .welcome {
   display: grid;
@@ -93,8 +149,10 @@ body {
 .form {
   display: flex;
   justify-content: center;
-  margin-bottom: 6rem; }
+  margin-bottom: 6rem;
+  font-family: inherit; }
   .form__select {
+    font-family: inherit;
     appearance: none;
     line-height: 2rem;
     width: 50%;
@@ -109,6 +167,8 @@ body {
         background: rgba(211, 160, 160, 0.74);
         border-radius: 10px; }
   .form__radio {
+    border: 2px #26262681 dashed;
+    font-family: inherit;
     justify-self: center;
     justify-content: space-around;
     min-width: 70%;
@@ -122,7 +182,9 @@ body {
   display: flex;
   justify-content: center;
   position: relative;
-  min-height: 80vh; }
+  min-height: 80vh;
+  z-index: 10;
+  transition: all ease 0.2s; }
   .quizzes__form {
     width: auto;
     list-style: none;
@@ -206,7 +268,8 @@ body {
   font-family: "Hero New", Inter, Helvetica, sans-serif; }
 
 body {
-  background-color: #fff2f2; }
+  background-color: #fff2f2;
+  transition: all ease 0.2s; }
 
 html {
   font-size: 10px; }

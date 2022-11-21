@@ -1,9 +1,96 @@
 .header {
+  position: relative;
   text-align: center;
-  font-size: 4rem;
-  font-weight: 700;
   letter-spacing: 0.2rem;
-  padding: 1.5rem;
   background-color: $color-white;
   color: $color-black;
+  padding: 1.5rem;
+  transition: all 2s ease;
+
+  &__title {
+    display: inline-block;
+    font-size: 4rem;
+    font-weight: 700;
+  }
+
+  &__small {
+    position: absolute;
+    top: 14rem;
+    padding: 1.4rem;
+    padding-top: 0.5rem;
+    padding-bottom: 3rem;
+    right: 0;
+    transform: translate(-25%, 0%);
+    color: $color-black;
+    background-color: rgb(241, 241, 128);
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    z-index: 0;
+    filter: opacity(0);
+    animation: slidein 13s;
+  }
+}
+
+@keyframes slidein {
+  0% {
+    transform: translate(100%, -50%);
+    filter: opacity(0.7);
+  }
+
+  9% {
+    transform: translate(-30%, -50%);
+  }
+
+  15% {
+    transform: translate(-25%, -50%);
+  }
+
+  50% {
+    transform: translate(-25%, -50%);
+  }
+  51% {
+    transform: translate(-25%, -40%);
+  }
+  52% {
+    transform: translate(-25%, -50%);
+  }
+
+  76% {
+    transform: translate(-25%, -50%);
+  }
+
+  77% {
+    transform: translate(-25%, -40%) rotate(3deg);
+  }
+
+  78% {
+    transform: translate(-25%, -50%) rotate(3deg);
+  }
+  79% {
+    transform: translate(-25%, -40%) rotate(3deg);
+  }
+  80% {
+    transform: translate(-25%, -50%) rotate(3deg);
+  }
+
+  89% {
+    transform: translate(-25%, -50%) rotate(-3deg);
+  }
+
+  90% {
+    transform: translate(-25%, -40%) rotate(-3deg);
+  }
+  91% {
+    transform: translate(-25%, -50%) rotate(-2deg);
+  }
+
+  99% {
+    transform: translate(-25%, -48%);
+    filter: opacity(0.7);
+  }
+
+  100% {
+    transform: translate(-25%, 0%);
+    filter: opacity(0);
+  }
 }

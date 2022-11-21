@@ -58,8 +58,10 @@
   display: flex;
   justify-content: center;
   margin-bottom: 6rem;
+  font-family: inherit;
 
   &__select {
+    font-family: inherit;
     appearance: none;
     line-height: 2rem;
     width: 50%;
@@ -80,6 +82,8 @@
   }
 
   &__radio {
+    border: 2px #26262681 dashed;
+    font-family: inherit;
     justify-self: center;
     justify-content: space-around;
     min-width: 70%;

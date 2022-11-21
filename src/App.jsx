@@ -128,11 +128,15 @@ function App() {
     <div className="App">
       <LoadingSpinner enabled={isLoading} />
       <Header />
-      {!quizForm.isSubmitted && (
+      {!quizForm.isSubmitted ? (
         <Welcome handleStartQuiz={(formData) => newGame(formData)} />
+      ) : (
+        <small className="header__small">
+          answer at least 60% questions to win
+        </small>
       )}
       {score.numCorrectAnswers >= 0.6 * score.totalQuestions ? (
-        <Confetti />
+        <Confetti style={{ zIndex: "100" }} />
       ) : null}
       {quizForm.isSubmitted && (
         <section className="quizzes">
