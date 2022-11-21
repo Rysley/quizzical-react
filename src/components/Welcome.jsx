@@ -1,12 +1,6 @@
 import React from "react";
 import { Carousel } from "react-carousel3";
-import logo from "../assets/react.svg";
-
-const style = {
-  width: "auto",
-  height: "auto",
-  cursor: "pointer",
-};
+import { quizCategories } from "../data/quizCategories";
 
 export default function Welcome(props) {
   const [formData, setFormData] = React.useState({
@@ -21,21 +15,9 @@ export default function Welcome(props) {
   }
 
   function handleChange(event) {
-    //console.log(event);
-    const { id, name } = event.target;
-    console.log(id, name);
-    setFormData((prevFormData) => {
-      return {
-        ...prevFormData,
-        [name]: id,
-      };
-    });
-  }
-
-  function handleSubmit(event) {
-    const { name, value } = event.target;
+    const { name, value, id } = event.target;
     setFormData((prevData) => {
-      return { ...prevData, [name]: value };
+      return { ...prevData, [name]: value ? value : id };
     });
   }
 
@@ -44,8 +26,11 @@ export default function Welcome(props) {
       return { ...prevData, isSubmitted: true };
     });
     props.handleStartQuiz(formData);
-    console.log("quiz started", formData);
   }
+
+  const Categories = quizCategories.map((category, i) => (
+    <option value={category.value} key={i}>{`${category.name}`}</option>
+  ));
 
   return (
     <section className="welcome">
@@ -66,35 +51,35 @@ export default function Welcome(props) {
           yRadius={20}
           autoPlay={false}
         >
-          <div key={1} style={style} className="welcome__carousel-element">
-            <span>EASY</span>
-            <img
-              src={logo}
+          <div key={1} className="welcome__carousel-element">
+            <span
               alt="easy"
               id="easy"
               name="difficulty"
               onClick={(e) => handleChange(e)}
-            />
+            >
+              😎 easy
+            </span>
           </div>
-          <div key={2} style={style}>
-            <span>MEDIUM</span>
-            <img
-              src={logo}
+          <div key={2} className="welcome__carousel-element">
+            <span
               alt="medium"
               id="medium"
               name="difficulty"
               onClick={(e) => handleChange(e)}
-            />
+            >
+              😅 medium
+            </span>
           </div>
-          <div key={3} style={style}>
-            <span>HARD</span>
-            <img
-              src={logo}
+          <div key={3} className="welcome__carousel-element">
+            <span
               alt="hard"
               id="hard"
               name="difficulty"
               onClick={(e) => handleChange(e)}
-            />
+            >
+              🥵 hard
+            </span>
           </div>
         </Carousel>
       </div>
@@ -104,39 +89,15 @@ export default function Welcome(props) {
       >
         Select category &rarr;
       </span>
-      <form className="form u-grid-start-2" onSubmit={handleSubmit}>
+      <form className="form u-grid-start-2" onSubmit={handleChange}>
         <select
           name="category"
           id="category"
           value={formData.category}
           className="form__select"
-          onChange={handleSubmit}
+          onChange={handleChange}
         >
-          <option value={""}>-- Any --</option>
-          <option value={"9"}>General Knowledge</option>
-          <option value={"10"}>Entertainment: Books</option>
-          <option value={"11"}>Entertainment: Film</option>
-          <option value={"12"}>Entertainment: Music</option>
-          <option value={"13"}>Entertainment: Theatre</option>
-          <option value={"14"}>Entertainment: Television</option>
-          <option value={"15"}>Entertainment: Video Games</option>
-          <option value={"16"}>Entertainment: Board Games</option>
-          <option value={"17"}>Science & Nature</option>
-          <option value={"18"}>Science: Computers</option>
-          <option value={"19"}>Science: Mathematics</option>
-          <option value={"20"}>Mythology</option>
-          <option value={"21"}>Sports</option>
-          <option value={"22"}>Geography</option>
-          <option value={"23"}>History</option>
-          <option value={"24"}>Politics</option>
-          <option value={"25"}>Art</option>
-          <option value={"26"}>Celebrities</option>
-          <option value={"27"}>Animals</option>
-          <option value={"28"}>Vehicles</option>
-          <option value={"29"}>Entertainment: Comics</option>
-          <option value={"30"}>Science: Gadgets</option>
-          <option value={"31"}>Entertainment: Manga</option>
-          <option value={"32"}>Entertainment: Cartoon</option>
+          {Categories}
         </select>
       </form>
       <button

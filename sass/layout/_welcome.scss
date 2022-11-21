@@ -22,7 +22,20 @@
     justify-content: center;
 
     &-element {
-      color: rgb(77, 124, 7);
+      width: "auto";
+      height: "auto";
+      cursor: pointer;
+      font-size: 3rem;
+      transition: all 0.2s;
+
+      &:hover {
+        color: $color-red;
+        font-size: 3.5rem;
+      }
+
+      &:active {
+        font-size: 3.3rem;
+      }
     }
   }
 
@@ -51,13 +64,14 @@
     border: 2px #26262681 dashed;
     background-color: antiquewhite;
 
-    &::-webkit-scrollbar-thumb {
-      background: red;
-    }
+    &::-webkit-scrollbar {
+      width: 20px;
+      background-color: rgba(250, 235, 215, 0.322);
 
-    &::-webkit-scrollbar-thumb {
-      background: red;
-      border-radius: 10px;
+      &-thumb {
+        background: rgba(211, 160, 160, 0.74);
+        border-radius: 10px;
+      }
     }
   }
 }

@@ -69,7 +69,16 @@ body {
     display: flex;
     justify-content: center; }
     .welcome__carousel-element {
-      color: #4d7c07; }
+      width: "auto";
+      height: "auto";
+      cursor: pointer;
+      font-size: 3rem;
+      transition: all 0.2s; }
+      .welcome__carousel-element:hover {
+        color: #eb8d8d;
+        font-size: 3.5rem; }
+      .welcome__carousel-element:active {
+        font-size: 3.3rem; }
   .welcome__new-game {
     display: inline-block;
     justify-self: center;
@@ -91,11 +100,12 @@ body {
     font-family: inherit;
     border: 2px #26262681 dashed;
     background-color: antiquewhite; }
-    .form__select::-webkit-scrollbar-thumb {
-      background: red; }
-    .form__select::-webkit-scrollbar-thumb {
-      background: red;
-      border-radius: 10px; }
+    .form__select::-webkit-scrollbar {
+      width: 20px;
+      background-color: rgba(250, 235, 215, 0.322); }
+      .form__select::-webkit-scrollbar-thumb {
+        background: rgba(211, 160, 160, 0.74);
+        border-radius: 10px; }
 
 .u-grid-start-2 {
   grid-column-start: 2; }
