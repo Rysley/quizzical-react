@@ -48,6 +48,7 @@ export default function Welcome(props) {
   const Amount = quizLength.map((amount, i) => (
     <div className="form__radio-input" key={i}>
       <input
+        className="form__radio-btn"
         type="radio"
         id={amount.value}
         value={amount.value}
@@ -55,7 +56,10 @@ export default function Welcome(props) {
         checked={formData.amount === amount.value}
         onChange={(e) => handleChange(e, amount.name)}
       />
-      <label htmlFor={amount.value}>{`${amount.value} questions`}</label>
+      <label
+        className="form__radio-label"
+        htmlFor={amount.value}
+      >{`${amount.value} questions`}</label>
     </div>
   ));
 
@@ -72,9 +76,9 @@ export default function Welcome(props) {
       </span>
       <div className="welcome__carousel u-grid-start-2">
         <Carousel
-          height={120}
+          height={100}
           width={980}
-          yOrigin={30}
+          yOrigin={20}
           yRadius={20}
           autoPlay={false}
         >

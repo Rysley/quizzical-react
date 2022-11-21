@@ -155,8 +155,9 @@ body {
     font-family: inherit;
     appearance: none;
     line-height: 2rem;
-    width: 50%;
+    min-width: 70%;
     padding: 1rem;
+    padding-left: 2rem;
     font-family: inherit;
     border: 2px #26262681 dashed;
     background-color: antiquewhite; }
@@ -167,12 +168,23 @@ body {
         background: rgba(211, 160, 160, 0.74);
         border-radius: 10px; }
   .form__radio {
+    position: relative;
     border: 2px #26262681 dashed;
     font-family: inherit;
     justify-self: center;
+    background-color: antiquewhite;
     justify-content: space-around;
     min-width: 70%;
-    margin-bottom: 8rem; }
+    margin-bottom: 8rem;
+    height: 5rem; }
+    .form__radio-btn {
+      position: absolute;
+      transform: translate(-50px, 2px);
+      height: 1rem; }
+    .form__radio-label {
+      height: 1rem;
+      position: absolute;
+      transform: translate(-27px, 3px); }
 
 .u-grid-start-2 {
   grid-column-start: 2; }
