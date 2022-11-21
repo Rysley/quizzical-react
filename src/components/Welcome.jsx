@@ -1,10 +1,10 @@
 import React from "react";
 import { Carousel } from "react-carousel3";
-import { quizCategories } from "../data/quizCategories";
+import { quizCategories, quizDifficulty, quizLength } from "../data/quizData";
 
 export default function Welcome(props) {
   const [formData, setFormData] = React.useState({
-    amount: 4,
+    amount: "4",
     difficulty: "easy",
     category: "",
     isSubmitted: false,
@@ -14,8 +14,8 @@ export default function Welcome(props) {
     console.log(formData);
   }
 
-  function handleChange(event) {
-    const { name, value, id } = event.target;
+  function handleChange(event, name) {
+    const { value, id } = event.target;
     setFormData((prevData) => {
       return { ...prevData, [name]: value ? value : id };
     });
@@ -30,6 +30,33 @@ export default function Welcome(props) {
 
   const Categories = quizCategories.map((category, i) => (
     <option value={category.value} key={i}>{`${category.name}`}</option>
+  ));
+
+  const Difficulties = quizDifficulty.map((difficulty, i) => (
+    <div key={i} className="welcome__carousel-element">
+      <span
+        key={i}
+        alt={difficulty.value}
+        id={difficulty.value}
+        onClick={(e) => handleChange(e, difficulty.name)}
+      >
+        {`${difficulty.text}`}
+      </span>
+    </div>
+  ));
+
+  const Amount = quizLength.map((amount, i) => (
+    <div className="form__radio-input" key={i}>
+      <input
+        type="radio"
+        id={amount.value}
+        value={amount.value}
+        name="amount"
+        checked={formData.amount === amount.value}
+        onChange={(e) => handleChange(e, amount.name)}
+      />
+      <label htmlFor={amount.value}>{`${amount.value} questions`}</label>
+    </div>
   ));
 
   return (
@@ -51,36 +78,7 @@ export default function Welcome(props) {
           yRadius={20}
           autoPlay={false}
         >
-          <div key={1} className="welcome__carousel-element">
-            <span
-              alt="easy"
-              id="easy"
-              name="difficulty"
-              onClick={(e) => handleChange(e)}
-            >
-              😎 easy
-            </span>
-          </div>
-          <div key={2} className="welcome__carousel-element">
-            <span
-              alt="medium"
-              id="medium"
-              name="difficulty"
-              onClick={(e) => handleChange(e)}
-            >
-              😅 medium
-            </span>
-          </div>
-          <div key={3} className="welcome__carousel-element">
-            <span
-              alt="hard"
-              id="hard"
-              name="difficulty"
-              onClick={(e) => handleChange(e)}
-            >
-              🥵 hard
-            </span>
-          </div>
+          {Difficulties}
         </Carousel>
       </div>
       <span
@@ -89,17 +87,28 @@ export default function Welcome(props) {
       >
         Select category &rarr;
       </span>
-      <form className="form u-grid-start-2" onSubmit={handleChange}>
+      <form className="form u-grid-start-2">
         <select
           name="category"
           id="category"
           value={formData.category}
           className="form__select"
-          onChange={handleChange}
+          onChange={(e) => handleChange(e, "category")}
         >
           {Categories}
         </select>
       </form>
+
+      <span
+        className="welcome__menu-description u-grid-start-2"
+        onClick={logClick}
+      >
+        Select length &rarr;
+      </span>
+      <fieldset className="form form__radio u-grid-start-2">
+        <legend>Number of questions in the quiz</legend>
+        {Amount}
+      </fieldset>
       <button
         className="btn welcome__new-game u-grid-start-2"
         onClick={handleStartQuiz}
@@ -109,3 +118,26 @@ export default function Welcome(props) {
     </section>
   );
 }
+/* 
+<div className="form__radio-input">
+<input
+  type="radio"
+  id="5"
+  value="5"
+  name="amount"
+  checked={formData.amount === "5"}
+  onChange={(e) => handleChange(e, "amount")}
+/>
+<label htmlFor="5">5 questions</label>
+</div>
+<div className="form__radio-input">
+<input
+  type="radio"
+  id="10"
+  value="10"
+  name="amount"
+  checked={formData.amount === "10"}
+  onChange={(e) => handleChange(e, "amount")}
+/>
+<label htmlFor="10">10 questions</label>
+</div> */

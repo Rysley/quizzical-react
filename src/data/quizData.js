@@ -25,3 +25,27 @@ export const quizCategories = [
   { value: "31", name: "Entertainment: Manga" },
   { value: "32", name: "Entertainment: Cartoon" },
 ];
+
+export const quizDifficulty = [
+  {
+    text: "😎 easy",
+    value: "easy",
+    name: "difficulty",
+  },
+  {
+    text: "😅 medium",
+    value: "medium",
+    name: "difficulty",
+  },
+  {
+    text: "🥵 hard",
+    value: "hard",
+    name: "difficulty",
+  },
+];
+
+export const quizLength = [
+  { name: "amount", value: "4" },
+  { name: "amount", value: "8" },
+  { name: "amount", value: "12" },
+];
