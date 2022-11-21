@@ -77,9 +77,9 @@ export default function Welcome(props) {
       <div className="welcome__carousel u-grid-start-2">
         <Carousel
           height={100}
-          width={980}
-          yOrigin={20}
-          yRadius={20}
+          width={450}
+          yOrigin={5}
+          yRadius={7}
           autoPlay={false}
         >
           {Difficulties}
@@ -100,6 +100,7 @@ export default function Welcome(props) {
           onChange={(e) => handleChange(e, "category")}
         >
           {Categories}
+          <legend>Number of questions in the quiz</legend>
         </select>
       </form>
 

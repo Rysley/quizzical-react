@@ -69,6 +69,23 @@ body {
     z-index: 0;
     filter: opacity(0);
     animation: slidein 13s; }
+  .header__logo {
+    animation: rotate linear 10s infinite;
+    filter: saturate(-200%) grayscale(400%); }
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+    filter: hue-rotate(0deg) saturate(30%); }
+  25% {
+    filter: hue-rotate(90deg) saturate(30%); }
+  50% {
+    filter: hue-rotate(180deg) saturate(30%); }
+  75% {
+    filter: hue-rotate(270deg) saturate(30%); }
+  100% {
+    transform: rotate(180deg);
+    filter: hue-rotate(360deg) saturate(30%); } }
 
 @keyframes slidein {
   0% {
@@ -93,7 +110,7 @@ body {
   79% {
     transform: translate(-25%, -40%) rotate(3deg); }
   80% {
-    transform: translate(-25%, -50%) rotate(3deg); }
+    transform: translate(-25%, -50%) rotate(-3deg); }
   89% {
     transform: translate(-25%, -50%) rotate(-3deg); }
   90% {
@@ -101,7 +118,7 @@ body {
   91% {
     transform: translate(-25%, -50%) rotate(-2deg); }
   99% {
-    transform: translate(-25%, -48%);
+    transform: translate(-25%, -48%) rotate(-2deg);
     filter: opacity(0.7); }
   100% {
     transform: translate(-25%, 0%);
@@ -110,31 +127,36 @@ body {
 .welcome {
   display: grid;
   justify-content: center;
-  grid-template-columns: 5vh 90vh 5vh; }
+  grid-template-columns: 5vh 90vh 5vh;
+  background-color: #e0e0e0; }
   .welcome__subtitle {
     display: inline-block;
     justify-content: center;
     width: 100%;
-    text-align: center; }
+    margin-top: 0rem;
+    text-align: center;
+    transform: translateY(-3rem); }
   .welcome__menu-description {
     display: inline-block;
     text-align: start;
-    width: 60%;
-    cursor: pointer; }
+    width: 15%;
+    font-size: 0.8rem; }
   .welcome__carousel {
     display: flex;
+    justify-self: center;
+    transform: translateX(0);
     justify-content: center; }
     .welcome__carousel-element {
-      width: "auto";
-      height: "auto";
+      width: auto;
+      height: auto;
       cursor: pointer;
-      font-size: 3rem;
+      font-size: 5rem;
       transition: all 0.2s; }
       .welcome__carousel-element:hover {
         color: #eb8d8d;
-        font-size: 3.5rem; }
+        font-size: 5.2rem; }
       .welcome__carousel-element:active {
-        font-size: 3.3rem; }
+        font-size: 5rem; }
     .welcome__carousel:hover .welcome__carousel-element:not(:hover) {
       filter: grayscale(0.7); }
   .welcome__new-game {

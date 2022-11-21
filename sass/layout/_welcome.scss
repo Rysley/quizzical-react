@@ -2,39 +2,44 @@
   display: grid;
   justify-content: center;
   grid-template-columns: 5vh 90vh 5vh;
+  background-color: $color-gray;
 
   &__subtitle {
     display: inline-block;
     justify-content: center;
     width: 100%;
+    margin-top: 0rem;
     text-align: center;
+    transform: translateY(-3rem);
   }
 
   &__menu-description {
     display: inline-block;
     text-align: start;
-    width: 60%;
-    cursor: pointer;
+    width: 15%;
+    font-size: 0.8rem;
   }
 
   &__carousel {
     display: flex;
+    justify-self: center;
+    transform: translateX(0);
     justify-content: center;
 
     &-element {
-      width: "auto";
-      height: "auto";
+      width: auto;
+      height: auto;
       cursor: pointer;
-      font-size: 3rem;
+      font-size: 5rem;
       transition: all 0.2s;
 
       &:hover {
         color: $color-red;
-        font-size: 3.5rem;
+        font-size: 5.2rem;
       }
 
       &:active {
-        font-size: 3.3rem;
+        font-size: 5rem;
       }
     }
 

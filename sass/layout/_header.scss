@@ -29,6 +29,35 @@
     filter: opacity(0);
     animation: slidein 13s;
   }
+
+  &__logo {
+    animation: rotate linear 10s infinite;
+    filter: saturate(-200%) grayscale(400%);
+  }
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+    filter: hue-rotate(0deg) saturate(30%);
+  }
+
+  25% {
+    filter: hue-rotate(90deg) saturate(30%);
+  }
+
+  50% {
+    filter: hue-rotate(180deg) saturate(30%);
+  }
+
+  75% {
+    filter: hue-rotate(270deg) saturate(30%);
+  }
+
+  100% {
+    transform: rotate(180deg);
+    filter: hue-rotate(360deg) saturate(30%);
+  }
 }
 
 @keyframes slidein {
@@ -70,7 +99,7 @@
     transform: translate(-25%, -40%) rotate(3deg);
   }
   80% {
-    transform: translate(-25%, -50%) rotate(3deg);
+    transform: translate(-25%, -50%) rotate(-3deg);
   }
 
   89% {
@@ -85,7 +114,7 @@
   }
 
   99% {
-    transform: translate(-25%, -48%);
+    transform: translate(-25%, -48%) rotate(-2deg);
     filter: opacity(0.7);
   }
 

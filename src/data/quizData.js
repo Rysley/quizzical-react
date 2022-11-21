@@ -28,17 +28,17 @@ export const quizCategories = [
 
 export const quizDifficulty = [
   {
-    text: "😎 easy",
+    text: "😎",
     value: "easy",
     name: "difficulty",
   },
   {
-    text: "😅 medium",
+    text: "😅",
     value: "medium",
     name: "difficulty",
   },
   {
-    text: "🥵 hard",
+    text: "🥵",
     value: "hard",
     name: "difficulty",
   },
