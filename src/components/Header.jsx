@@ -1,7 +1,5 @@
 import React from "react";
-//import logo from "../assets/react.svg";
 import donut from "../assets/donut.svg";
-import coffee from "../assets/coffee.svg";
 
 export default function Header(props) {
   const styles_left = {

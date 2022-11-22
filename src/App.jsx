@@ -74,12 +74,19 @@ function App() {
     setIsLoading(true);
   }
 
-  function newGame(startData) {
+  function startGame(startData) {
+    setQuizForm((prevData) => {
+      return { ...prevData, ...startData, isSubmitted: true };
+    });
+    setGameCount((num) => num + 1);
+  }
+
+  function newGame() {
     setQuizIsChecked(false);
     setQuizIsComplete(false);
     setScore({});
     setQuizForm((prevData) => {
-      return { ...prevData, ...startData, isSubmitted: true };
+      return { ...prevData };
     });
     setGameCount((num) => num + 1);
   }
@@ -130,8 +137,9 @@ function App() {
     <div className="app">
       <LoadingSpinner enabled={isLoading} />
       <Header handleMenu={backToMenu} isSubmitted={quizForm.isSubmitted} />
+
       {!quizForm.isSubmitted ? (
-        <Welcome handleStartQuiz={(formData) => newGame(formData)} />
+        <Welcome handleStartQuiz={(formData) => startGame(formData)} />
       ) : (
         <small className="header__small">
           answer at least 60% questions to win
