@@ -5,6 +5,16 @@
 body {
   background-color: $color-white;
   transition: all ease 0.2s;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+    background-color: rgba(250, 235, 215, 0.322);
+
+    &-thumb {
+      background: rgba(211, 160, 160, 0.74);
+      border-radius: 4px;
+    }
+  }
 }
 
 html {

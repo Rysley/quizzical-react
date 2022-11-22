@@ -35,23 +35,26 @@
 
       &:hover {
         color: $color-red;
-        font-size: 5.2rem;
+        font-size: 5.15rem;
       }
 
       &:active {
-        font-size: 5rem;
+        font-size: 5.1rem;
       }
     }
 
     &:hover &-element:not(:hover) {
-      filter: grayscale(0.7);
+      filter: grayscale(0.7) blur(2px);
+      transition-delay: 0.2s;
     }
   }
 
   &__new-game {
     display: inline-block;
     justify-self: center;
-    background-color: $color-gray;
+    margin-top: 4rem;
+    margin-bottom: 5rem;
+    background-color: $color-white;
     grid-column-start: 2;
     font-size: 2.5em;
     height: 5rem;
@@ -95,7 +98,7 @@
     background-color: antiquewhite;
     justify-content: space-around;
     min-width: 70%;
-    margin-bottom: 8rem;
+    margin-bottom: 2.5rem;
     height: 5rem;
 
     &-btn {

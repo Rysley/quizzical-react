@@ -9,7 +9,6 @@ export default function QuizCard(props) {
   const answerBtns = allAnswers.map((answer) => {
     let resultStyles;
 
-    console.log(answer);
     const isSelected = answer.id === data.selected_answer;
     const isCorrect = answer.id === data.correct_answer;
 

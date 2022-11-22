@@ -78,11 +78,14 @@ function App() {
     setQuizIsChecked(false);
     setQuizIsComplete(false);
     setScore({});
-    console.log(startData);
     setQuizForm((prevData) => {
       return { ...prevData, ...startData, isSubmitted: true };
     });
     setGameCount((num) => num + 1);
+  }
+
+  function backToMenu() {
+    setQuizForm((prev) => ({ ...prev, isSubmitted: false }));
   }
 
   function chooseAnswer(e, id) {
@@ -118,16 +121,15 @@ function App() {
         isChecked={quizIsChecked}
         question={question}
         key={question.id}
-        /*  id={question.id} */
         handleClick={(e) => chooseAnswer(e, question.id)}
       />
     );
   });
 
   return (
-    <div className="App">
+    <div className="app">
       <LoadingSpinner enabled={isLoading} />
-      <Header />
+      <Header handleMenu={backToMenu} isSubmitted={quizForm.isSubmitted} />
       {!quizForm.isSubmitted ? (
         <Welcome handleStartQuiz={(formData) => newGame(formData)} />
       ) : (
