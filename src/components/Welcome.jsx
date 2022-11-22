@@ -10,10 +10,6 @@ export default function Welcome(props) {
     isSubmitted: false,
   });
 
-  function logClick() {
-    console.log(formData);
-  }
-
   function handleChange(event, name) {
     const { value, id } = event.target;
     setFormData((prevData) => {
@@ -68,10 +64,7 @@ export default function Welcome(props) {
       <h2 className="welcome__subtitle u-grid-start-2">
         Answer trivia questions from 25 fun categorties
       </h2>
-      <span
-        className="welcome__menu-description u-grid-start-2"
-        onClick={logClick}
-      >
+      <span className="welcome__menu-description u-grid-start-2">
         Select difficulty &rarr;
       </span>
       <div className="welcome__carousel u-grid-start-2">
@@ -85,10 +78,7 @@ export default function Welcome(props) {
           {QuizDifficulty}
         </Carousel>
       </div>
-      <span
-        className="welcome__menu-description u-grid-start-2"
-        onClick={logClick}
-      >
+      <span className="welcome__menu-description u-grid-start-2">
         Select category &rarr;
       </span>
       <form className="form u-grid-start-2">
@@ -103,10 +93,7 @@ export default function Welcome(props) {
         </select>
       </form>
 
-      <span
-        className="welcome__menu-description u-grid-start-2"
-        onClick={logClick}
-      >
+      <span className="welcome__menu-description u-grid-start-2">
         Select length &rarr;
       </span>
       <fieldset className="form form__radio u-grid-start-2">
