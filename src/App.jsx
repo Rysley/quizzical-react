@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import ReactDOM from "react-dom";
 import Welcome from "./components/Welcome";
 import Header from "./components/Header";
 import QuizCard from "./components/QuizCard";
@@ -126,9 +127,14 @@ function App() {
     );
   });
 
+  const spinner = ReactDOM.createPortal(
+    <LoadingSpinner enabled={isLoading} />,
+    document.getElementById("overlay-root")
+  );
+
   return (
-    <div className="app">
-      <LoadingSpinner enabled={isLoading} />
+    <React.Fragment>
+      {spinner}
       <Header handleMenu={backToMenu} isSubmitted={quizForm.isSubmitted} />
 
       {!quizForm.isSubmitted ? (
@@ -155,7 +161,7 @@ function App() {
           handleSubmit={() => checkQuiz()}
         />
       )}
-    </div>
+    </React.Fragment>
   );
 }
 
