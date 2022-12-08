@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { Carousel } from "react-carousel3";
 import QuestionsContext from "../context/questions-context";
 import { quizCategories, quizDifficulty, quizLength } from "../data/quizData";
 
-export default function Welcome(props) {
-  const ctx = React.useContext(QuestionsContext);
-  const [formData, setFormData] = React.useState({
+export default function Welcome() {
+  const { newGame, quizForm } = useContext(QuestionsContext);
+  const [formData, setFormData] = useState({
     amount: "4",
     difficulty: "easy",
     category: "",
@@ -23,7 +23,7 @@ export default function Welcome(props) {
     setFormData((prevData) => {
       return { ...prevData, isSubmitted: true };
     });
-    ctx.newGame(formData);
+    newGame(formData);
   }
 
   const QuizDifficulty = quizDifficulty.map((difficulty, i) => (
@@ -117,7 +117,7 @@ export default function Welcome(props) {
     </section>
   );
 
-  const renderedContent = !ctx.quizForm.isSubmitted ? form : infoNote;
+  const renderedContent = !quizForm.isSubmitted ? form : infoNote;
 
   return <React.Fragment>{renderedContent}</React.Fragment>;
 }

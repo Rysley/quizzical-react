@@ -3,7 +3,7 @@ import donut from "../assets/donut.svg";
 import QuestionsContext from "../context/questions-context";
 
 export default function Header() {
-  const ctx = useContext(QuestionsContext);
+  const { quizForm, backToMenu } = useContext(QuestionsContext);
 
   const styles_left = {
     opacity: "1",
@@ -17,8 +17,8 @@ export default function Header() {
 
   return (
     <header className="header">
-      {ctx.quizForm.isSubmitted && (
-        <button className="header__btn-menu" onClick={ctx.backToMenu}>
+      {quizForm.isSubmitted && (
+        <button className="header__btn-menu" onClick={backToMenu}>
           &#9776;
         </button>
       )}
@@ -28,7 +28,7 @@ export default function Header() {
         className="header__logo header__logo-left"
         src={donut}
         alt="donut"
-        style={ctx.quizForm.isSubmitted ? styles_left : styles_none}
+        style={quizForm.isSubmitted ? styles_left : styles_none}
       />
     </header>
   );
