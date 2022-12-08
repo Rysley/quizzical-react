@@ -1,164 +1,62 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import ReactDOM from "react-dom";
 import Welcome from "./components/Welcome";
 import Header from "./components/Header";
 import QuizCard from "./components/QuizCard";
 import Panel from "./components/Panel";
-import arrayShuffle from "array-shuffle";
-import { nanoid } from "nanoid";
 import Confetti from "react-confetti";
 import LoadingSpinner from "./assets/SpinnerCircular";
+import QuestionsContext from "./context/questions-context";
 
 function App() {
-  const [gameCount, setGameCount] = useState(0);
-  const [quizForm, setQuizForm] = useState({
-    amount: 4,
-    difficulty: "easy",
-    category: "",
-    isSubmitted: false,
-  });
-  const [questions, setQuestions] = useState([]);
-  const [quizIsComplete, setQuizIsComplete] = useState(false);
-  const [quizIsChecked, setQuizIsChecked] = useState(false);
-  const [score, setScore] = useState({});
-  const [isLoading, setIsLoading] = useState(false);
+  const ctx = React.useContext(QuestionsContext);
 
-  useEffect(() => {
-    setQuizIsComplete(() =>
-      questions.every((question) => question.selected_answer !== "")
-    );
-  }, [questions]);
-
-  useEffect(() => {
-    renderSpinner();
-    fetch(
-      `https://opentdb.com/api.php?amount=${quizForm.amount}&category=${quizForm.category}&difficulty=${quizForm.difficulty}&type=multiple`
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        setQuestions(() => {
-          const questionsArr = data.results.map((el) => {
-            const correctID = nanoid();
-            return {
-              ...el,
-              question: el.question,
-              id: nanoid(),
-              all_answers: arrayShuffle(
-                el.incorrect_answers
-                  .map((incAnswer) => {
-                    return {
-                      answer: incAnswer,
-                      isCorrect: false,
-                      id: nanoid(),
-                    };
-                  })
-                  .concat([
-                    {
-                      answer: el.correct_answer,
-                      isCorrect: true,
-                      id: correctID,
-                    },
-                  ])
-              ),
-
-              selected_answer: "",
-              correct_answer: correctID,
-            };
-          });
-          setIsLoading(false);
-          return questionsArr;
-        });
-      });
-  }, [gameCount]);
-
-  function renderSpinner() {
-    setIsLoading(true);
-  }
-
-  function newGame(startData = quizForm) {
-    setQuizIsChecked(false);
-    setQuizIsComplete(false);
-    setScore({});
-    setQuizForm((prevData) => {
-      return { ...prevData, ...startData, isSubmitted: true };
-    });
-    setGameCount((num) => num + 1);
-  }
-
-  function backToMenu() {
-    setQuizForm((prev) => ({ ...prev, isSubmitted: false }));
-  }
-
-  function chooseAnswer(e, id) {
-    setQuestions((prevState) => {
-      const newState = prevState.map((el) => {
-        if (el.id === id) {
-          return { ...el, selected_answer: e.target.id };
-        } else {
-          return el;
-        }
-      });
-      return newState;
-    });
-  }
-
-  function checkQuiz() {
-    if (quizIsComplete) setQuizIsChecked(true);
-
-    const totalCorrect = questions.filter(
-      (q) => q.selected_answer === q.correct_answer
-    );
-
-    setScore((prevState) => ({
-      ...prevState,
-      numCorrectAnswers: totalCorrect.length,
-      totalQuestions: questions.length,
-    }));
-  }
-
-  const quizCards = questions.map((question) => {
+  const quizCards = ctx.questions.map((question) => {
     return (
       <QuizCard
-        isChecked={quizIsChecked}
+        isChecked={ctx.quizIsChecked}
         question={question}
         key={question.id}
-        handleClick={(e) => chooseAnswer(e, question.id)}
+        handleClick={(e) => ctx.chooseAnswer(e, question.id)}
       />
     );
   });
 
   const spinner = ReactDOM.createPortal(
-    <LoadingSpinner enabled={isLoading} />,
+    <LoadingSpinner enabled={ctx.isLoading} />,
     document.getElementById("overlay-root")
   );
 
   return (
     <React.Fragment>
       {spinner}
-      <Header handleMenu={backToMenu} isSubmitted={quizForm.isSubmitted} />
+      <Header
+        handleMenu={ctx.backToMenu}
+        isSubmitted={ctx.quizForm.isSubmitted}
+      />
 
-      {!quizForm.isSubmitted ? (
-        <Welcome handleStartQuiz={(formData) => newGame(formData)} />
+      {!ctx.quizForm.isSubmitted ? (
+        <Welcome handleStartQuiz={(formData) => ctx.newGame(formData)} />
       ) : (
         <small className="header__small">
           answer at least 60% questions to win
         </small>
       )}
-      {score.numCorrectAnswers >= 0.6 * score.totalQuestions ? (
+      {ctx.score.numCorrectAnswers >= 0.6 * ctx.score.totalQuestions ? (
         <Confetti style={{ zIndex: "100" }} />
       ) : null}
-      {quizForm.isSubmitted && (
+      {ctx.quizForm.isSubmitted && (
         <section className="quizzes">
           <div className="quizzes__form">{quizCards}</div>
         </section>
       )}
-      {quizForm.isSubmitted && (
+      {ctx.quizForm.isSubmitted && (
         <Panel
-          isComplete={quizIsComplete}
-          isChecked={quizIsChecked}
-          score={score}
-          handleNewGame={() => newGame()}
-          handleSubmit={() => checkQuiz()}
+          isComplete={ctx.quizIsComplete}
+          isChecked={ctx.quizIsChecked}
+          score={ctx.score}
+          handleNewGame={() => ctx.newGame()}
+          handleSubmit={() => ctx.checkQuiz()}
         />
       )}
     </React.Fragment>
