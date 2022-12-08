@@ -3,7 +3,7 @@ import QuestionsContext from "../context/questions-context";
 
 export default function Panel() {
   const ctx = React.useContext(QuestionsContext);
-  return (
+  const panel = ctx.quizForm.isSubmitted ? (
     <section className="panel">
       {ctx.quizIsComplete && !ctx.quizIsChecked && (
         <div className="panel__check-game btn" onClick={ctx.checkQuiz}>
@@ -23,5 +23,7 @@ export default function Panel() {
         </div>
       )}
     </section>
-  );
+  ) : null;
+
+  return <React.Fragment>{panel}</React.Fragment>;
 }

@@ -8,7 +8,7 @@ export default function ConfettiAnimation() {
   const confetti =
     ctx.score.numCorrectAnswers >= 0.6 * ctx.score.totalQuestions
       ? ReactDOM.createPortal(
-          <Confetti style={{ zIndex: "100" }} />,
+          <Confetti style={{ zIndex: "1000" }} />,
           document.getElementById("overlay-root")
         )
       : null;

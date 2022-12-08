@@ -1,7 +1,10 @@
-import React from "react";
+import { useContext } from "react";
 import donut from "../assets/donut.svg";
+import QuestionsContext from "../context/questions-context";
 
-export default function Header(props) {
+export default function Header() {
+  const ctx = useContext(QuestionsContext);
+
   const styles_left = {
     opacity: "1",
     marginLeft: "0.14rem",
@@ -14,8 +17,8 @@ export default function Header(props) {
 
   return (
     <header className="header">
-      {props.isSubmitted && (
-        <button className="header__btn-menu" onClick={props.handleMenu}>
+      {ctx.quizForm.isSubmitted && (
+        <button className="header__btn-menu" onClick={ctx.backToMenu}>
           &#9776;
         </button>
       )}
@@ -25,7 +28,7 @@ export default function Header(props) {
         className="header__logo header__logo-left"
         src={donut}
         alt="donut"
-        style={props.isSubmitted ? styles_left : styles_none}
+        style={ctx.quizForm.isSubmitted ? styles_left : styles_none}
       />
     </header>
   );

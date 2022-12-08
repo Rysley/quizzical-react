@@ -16,9 +16,11 @@ export default function Quizzes() {
     );
   });
 
-  return (
+  const quizzes = ctx.quizForm.isSubmitted ? (
     <section className="quizzes">
       <div className="quizzes__form">{quizCards}</div>
     </section>
-  );
+  ) : null;
+
+  return <React.Fragment>{quizzes}</React.Fragment>;
 }

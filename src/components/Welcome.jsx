@@ -1,8 +1,10 @@
 import React from "react";
 import { Carousel } from "react-carousel3";
+import QuestionsContext from "../context/questions-context";
 import { quizCategories, quizDifficulty, quizLength } from "../data/quizData";
 
 export default function Welcome(props) {
+  const ctx = React.useContext(QuestionsContext);
   const [formData, setFormData] = React.useState({
     amount: "4",
     difficulty: "easy",
@@ -21,7 +23,7 @@ export default function Welcome(props) {
     setFormData((prevData) => {
       return { ...prevData, isSubmitted: true };
     });
-    props.handleStartQuiz(formData);
+    ctx.newGame(formData);
   }
 
   const QuizDifficulty = quizDifficulty.map((difficulty, i) => (
@@ -59,7 +61,13 @@ export default function Welcome(props) {
     </div>
   ));
 
-  return (
+  const infoNote = (
+    <small className="header__small">
+      answer at least 60% questions to win
+    </small>
+  );
+
+  const form = (
     <section className="welcome">
       <h2 className="welcome__subtitle u-grid-start-2">
         Answer trivia questions from 25 fun categorties
@@ -108,4 +116,8 @@ export default function Welcome(props) {
       </button>
     </section>
   );
+
+  const renderedContent = !ctx.quizForm.isSubmitted ? form : infoNote;
+
+  return <React.Fragment>{renderedContent}</React.Fragment>;
 }
