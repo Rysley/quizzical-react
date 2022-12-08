@@ -1,22 +1,24 @@
 import React from "react";
+import QuestionsContext from "../context/questions-context";
 
-export default function Panel(props) {
+export default function Panel() {
+  const ctx = React.useContext(QuestionsContext);
   return (
     <section className="panel">
-      {props.isComplete && !props.isChecked && (
-        <div className="panel__check-game btn" onClick={props.handleSubmit}>
+      {ctx.quizIsComplete && !ctx.quizIsChecked && (
+        <div className="panel__check-game btn" onClick={ctx.checkQuiz}>
           Check Answers
         </div>
       )}
-      {props.isChecked && (
-        <span className="panel__result-info">{`You've guessed ${props.score.numCorrectAnswers}/${props.score.totalQuestions} questions!`}</span>
+      {ctx.quizIsChecked && (
+        <span className="panel__result-info">{`You've guessed ${ctx.score.numCorrectAnswers}/${ctx.score.totalQuestions} questions!`}</span>
       )}
-      {props.isComplete ? (
-        <div className="panel__new-game btn" onClick={props.handleNewGame}>
+      {ctx.quizIsComplete ? (
+        <div className="panel__new-game btn" onClick={ctx.newGame}>
           New Game
         </div>
       ) : (
-        <div className="panel__restart btn" onClick={props.handleNewGame}>
+        <div className="panel__restart btn" onClick={ctx.newGame}>
           Restart
         </div>
       )}
